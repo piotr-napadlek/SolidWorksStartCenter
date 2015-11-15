@@ -1,0 +1,67 @@
+﻿<Window x:Class="WNApplications.SWSC.UI.DrawingTemplatesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WNApplications.SWSC.UI"
+        mc:Ignorable="d"
+        Title="Lista szablonów rysunkowych" Height="208" Width="638" ResizeMode="NoResize" WindowStyle="ToolWindow" ShowInTaskbar="False">
+    <Grid Margin="2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="2"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="32"/>
+            <RowDefinition Height="57*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="105"/>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="271"/>
+            <ColumnDefinition Width="32"/>
+            <ColumnDefinition Width="32"/>
+        </Grid.ColumnDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Margin="8,2,0,2" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" >Nazwa szablonu</Label>
+        <TextBox Grid.Row="0" Grid.Column="1" HorizontalAlignment="Stretch" Margin="2,6" Text="{Binding Path=SelectedTemplate.DrwTemplateName, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" IsEnabled="{Binding IsSelected}"/>
+        <Label Grid.Row="0" Grid.Column="2" Margin="8,2,0,2" >Ścieżka .slddrt</Label>
+        <TextBox Name="FilePath" Grid.Row="0" Grid.Column="3" HorizontalAlignment="Stretch" Margin="2,6" Text="{Binding Path=SelectedTemplate.SlddrtPath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"  IsEnabled="{Binding IsSelected}"/>
+        <Button Grid.Row="0" Grid.Column="4" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3" Padding="1" ToolTip="Wybierz plik" Command="{Binding Path=ChooseFileCommand}" CommandParameter="{Binding ElementName=FilePath}" >
+            <ContentControl Content="{StaticResource document}"/>
+        </Button>
+        <Button Grid.Row="0" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3" Padding="1" ToolTip="Dodaj" Command="{Binding AddTemplateCommand}">
+            <ContentControl Content="{StaticResource plus}"/>
+        </Button>
+        <Rectangle Grid.Row="1" Grid.ColumnSpan="6" Fill="#FF5F5F5F" Margin="4,0" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin"></Rectangle>
+
+        <ListBox Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="5" Grid.RowSpan="3" Margin="2" ItemsSource="{Binding DrawingTemplates, UpdateSourceTrigger=PropertyChanged}" SelectedItem="{Binding SelectedTemplate, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}" DisplayMemberPath="DisplayName"></ListBox>
+
+        <Button Grid.Row="2" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3" Padding="1" ToolTip="Przesuń w górę" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Command="{Binding Path=MoveUpCommand}">
+            <ContentControl Content="{StaticResource up}"/>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3" Padding="1" ToolTip="Usuń z listy" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Command="{Binding Path=DeleteTemplateCommand}">
+            <ContentControl Content="{StaticResource minus}"/>
+        </Button>
+
+        <Button Grid.Row="4" Grid.Column="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="3" Padding="1" ToolTip="Przesuń w dół" d:LayoutOverrides="LeftMargin, RightMargin, TopMargin, BottomMargin" Command="{Binding Path=MoveDownCommand}">
+            <ContentControl Content="{StaticResource down}"/>
+        </Button>
+
+        <Button Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="2" VerticalAlignment="Stretch" Margin="5,5,160,5" Padding="2" ToolTip="Potwierdź i zapisz ustawienia" Command="{Binding Path=OkCommand}">
+            <DockPanel>
+                <ContentControl DockPanel.Dock="Left" Content="{StaticResource OK}" Margin="2"/>
+                <Label DockPanel.Dock="Right" Padding="1" Margin="5,0,0,0" VerticalAlignment="Center">Zapisz</Label>
+            </DockPanel>
+        </Button>
+
+        <Button Grid.Row="5" Grid.Column="4" Grid.ColumnSpan="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="-150,5,7,5" Padding="2" ToolTip="Odrzuć ustawienia" IsCancel="True">
+            <DockPanel>
+                <ContentControl DockPanel.Dock="Left" Content="{StaticResource cancel}" Margin="2"/>
+                <Label DockPanel.Dock="Right" Padding="1" Margin="5,0,0,0" VerticalAlignment="Center">Anuluj</Label>
+            </DockPanel>
+        </Button>
+
+    </Grid>
+</Window>

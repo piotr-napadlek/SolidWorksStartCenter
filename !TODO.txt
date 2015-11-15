@@ -1,0 +1,6 @@
+-!!! Add Unit testing to the project
+-Implement transactions on Registry manipulation
+-Improve registry manipulation to avoid doubling manipulations
+-Improve UI Layouts
+-Add Backup/Restore window functionality
+-Refactor/clean the code generally
